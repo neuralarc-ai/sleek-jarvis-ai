@@ -1,7 +1,6 @@
 
 import React, { useState, useRef } from 'react';
 import { Mic, MicOff } from 'lucide-react';
-import { Button } from '@/components/ui/button';
 
 interface VoiceRecorderProps {
   onTranscription: (text: string) => void;
@@ -39,14 +38,11 @@ const VoiceRecorder: React.FC<VoiceRecorderProps> = ({
         setIsProcessing(true);
         onRecordingStop?.();
         
-        // For now, we'll simulate transcription since we need API keys
-        // In a real implementation, you'd send this to a speech-to-text service
         setTimeout(() => {
           onTranscription("Voice message recorded and ready for processing");
           setIsProcessing(false);
         }, 1000);
         
-        // Clean up the stream
         stream.getTracks().forEach(track => track.stop());
       };
 
@@ -75,49 +71,100 @@ const VoiceRecorder: React.FC<VoiceRecorderProps> = ({
 
   return (
     <div className="relative flex items-center justify-center">
-      {/* Outer glow rings for recording state */}
+      {/* Outer magical rings */}
+      <div className="absolute inset-0 -m-20">
+        <div className="absolute inset-0 rounded-full bg-gradient-to-r from-primary/20 to-secondary/20 magical-ring scale-150 animate-pulse"></div>
+        <div className="absolute inset-0 rounded-full bg-gradient-to-r from-secondary/15 to-primary/15 magical-ring scale-200 animate-pulse delay-1000"></div>
+        <div className="absolute inset-0 rounded-full bg-gradient-to-r from-primary/10 to-secondary/10 magical-ring scale-250 animate-pulse delay-500"></div>
+      </div>
+
+      {/* Recording energy waves */}
       {isRecording && (
         <>
-          <div className="absolute inset-0 rounded-full bg-primary/10 pulse-ring scale-150"></div>
-          <div className="absolute inset-0 rounded-full bg-primary/10 pulse-ring scale-125 delay-75"></div>
+          <div className="absolute inset-0 -m-12 rounded-full bg-primary/30 energy-wave animate-ping"></div>
+          <div className="absolute inset-0 -m-8 rounded-full bg-primary/20 energy-wave animate-ping delay-200"></div>
+          <div className="absolute inset-0 -m-4 rounded-full bg-primary/10 energy-wave animate-ping delay-400"></div>
         </>
       )}
       
-      {/* Main microphone button */}
-      <Button
-        onClick={toggleRecording}
-        disabled={disabled || isProcessing}
-        size="lg"
-        className={`
-          relative h-20 w-20 rounded-full transition-all duration-500 backdrop-blur-sm
-          ${isRecording 
-            ? 'bg-gradient-to-r from-destructive to-destructive/80 hover:from-destructive/90 hover:to-destructive/70 jarvis-glow shadow-2xl shadow-destructive/25' 
-            : 'bg-gradient-to-r from-primary to-secondary hover:from-primary/90 hover:to-secondary/90 hover:scale-110 shadow-xl shadow-primary/25'
-          }
-          ${isProcessing ? 'opacity-70 cursor-not-allowed' : ''}
-        `}
-      >
-        {isProcessing ? (
-          <div className="h-8 w-8 animate-spin rounded-full border-3 border-background border-t-transparent"></div>
-        ) : isRecording ? (
-          <MicOff className="h-8 w-8 animate-pulse" />
-        ) : (
-          <Mic className="h-8 w-8" />
-        )}
-      </Button>
+      {/* Main orb container */}
+      <div className="relative">
+        {/* Orb glow effect */}
+        <div className={`absolute inset-0 -m-8 rounded-full transition-all duration-1000 ${
+          isRecording 
+            ? 'bg-gradient-to-r from-destructive/40 to-primary/40 scale-150 orb-glow-active' 
+            : isProcessing
+            ? 'bg-gradient-to-r from-secondary/40 to-accent/40 scale-125 orb-glow-thinking'
+            : 'bg-gradient-to-r from-primary/30 to-secondary/30 scale-100 orb-glow-idle'
+        }`}></div>
 
-      {/* Recording indicator dots */}
-      {isRecording && (
-        <div className="absolute -bottom-8 flex space-x-1">
-          {[...Array(3)].map((_, i) => (
-            <div
-              key={i}
-              className="h-1.5 w-1.5 bg-destructive rounded-full animate-pulse"
-              style={{ animationDelay: `${i * 200}ms` }}
-            />
-          ))}
-        </div>
-      )}
+        {/* Inner orb layers */}
+        <div className={`absolute inset-0 -m-4 rounded-full transition-all duration-700 ${
+          isRecording 
+            ? 'bg-gradient-to-br from-destructive/60 to-primary/60 animate-pulse' 
+            : isProcessing
+            ? 'bg-gradient-to-br from-secondary/60 to-accent/60 animate-spin'
+            : 'bg-gradient-to-br from-primary/50 to-secondary/50'
+        }`}></div>
+
+        {/* Main microphone orb */}
+        <button
+          onClick={toggleRecording}
+          disabled={disabled || isProcessing}
+          className={`
+            relative h-32 w-32 rounded-full transition-all duration-500 
+            backdrop-blur-xl border-2 border-white/20
+            hover:scale-110 active:scale-95
+            ${isRecording 
+              ? 'bg-gradient-to-br from-destructive via-primary to-destructive/80 shadow-2xl shadow-destructive/50' 
+              : isProcessing
+              ? 'bg-gradient-to-br from-secondary via-accent to-secondary/80 shadow-2xl shadow-secondary/50'
+              : 'bg-gradient-to-br from-primary via-secondary to-primary/80 shadow-2xl shadow-primary/50 hover:shadow-primary/70'
+            }
+            ${isProcessing ? 'opacity-90 cursor-not-allowed' : ''}
+          `}
+        >
+          {/* Inner orb highlight */}
+          <div className="absolute top-4 left-4 w-8 h-8 rounded-full bg-white/30 blur-sm"></div>
+          
+          {/* Icon */}
+          <div className="relative z-10 flex items-center justify-center h-full">
+            {isProcessing ? (
+              <div className="relative">
+                <div className="h-12 w-12 animate-spin rounded-full border-4 border-white/30 border-t-white"></div>
+                <div className="absolute inset-2 animate-pulse rounded-full bg-white/20"></div>
+              </div>
+            ) : isRecording ? (
+              <MicOff className="h-12 w-12 text-white animate-pulse drop-shadow-lg" />
+            ) : (
+              <Mic className="h-12 w-12 text-white drop-shadow-lg" />
+            )}
+          </div>
+
+          {/* Bottom reflection */}
+          <div className="absolute bottom-2 left-1/2 transform -translate-x-1/2 w-16 h-4 bg-white/10 rounded-full blur-md"></div>
+        </button>
+
+        {/* Floating particles */}
+        {(isRecording || isProcessing) && (
+          <div className="absolute inset-0 pointer-events-none">
+            {[...Array(6)].map((_, i) => (
+              <div
+                key={i}
+                className={`absolute w-2 h-2 rounded-full ${
+                  isRecording ? 'bg-destructive/60' : 'bg-secondary/60'
+                } floating-particle`}
+                style={{
+                  top: `${20 + Math.sin(i * 60 * Math.PI / 180) * 60}%`,
+                  left: `${50 + Math.cos(i * 60 * Math.PI / 180) * 60}%`,
+                  animationDelay: `${i * 200}ms`,
+                  animationDuration: '3s'
+                }}
+              />
+            ))}
+          </div>
+        )}
+      </div>
     </div>
   );
 };
