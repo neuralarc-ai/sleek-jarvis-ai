@@ -81,133 +81,12 @@
 }
 
 @layer components {
-  .magical-ring {
-    animation: magical-pulse 4s ease-in-out infinite;
-  }
-  
-  .energy-wave {
-    animation: energy-pulse 1.5s ease-out infinite;
-  }
-  
-  .orb-glow-idle {
-    animation: idle-glow 3s ease-in-out infinite alternate;
-    filter: blur(8px);
-  }
-  
-  .orb-glow-active {
-    animation: active-glow 0.8s ease-in-out infinite alternate;
-    filter: blur(12px);
-  }
-  
-  .orb-glow-thinking {
-    animation: thinking-glow 1.2s ease-in-out infinite;
-    filter: blur(10px);
-  }
-  
-  .floating-particle {
-    animation: float-around 3s ease-in-out infinite;
-  }
-  
   .floating-orb {
     animation: float-gentle 6s ease-in-out infinite;
   }
   
   .magical-aura {
     animation: aura-drift 8s ease-in-out infinite;
-  }
-
-  .quantum-pulse {
-    animation: quantum-energy 2s ease-in-out infinite;
-  }
-
-  .holographic-shimmer {
-    animation: holographic-shift 3s ease-in-out infinite;
-  }
-
-  .neural-pattern {
-    animation: neural-flow 4s ease-in-out infinite;
-  }
-  
-  @keyframes magical-pulse {
-    0%, 100% {
-      transform: scale(1);
-      opacity: 0.3;
-    }
-    50% {
-      transform: scale(1.1);
-      opacity: 0.6;
-    }
-  }
-  
-  @keyframes energy-pulse {
-    0% {
-      transform: scale(1);
-      opacity: 0.8;
-    }
-    100% {
-      transform: scale(2.5);
-      opacity: 0;
-    }
-  }
-  
-  @keyframes idle-glow {
-    0% {
-      transform: scale(1);
-      opacity: 0.4;
-    }
-    100% {
-      transform: scale(1.3);
-      opacity: 0.8;
-    }
-  }
-  
-  @keyframes active-glow {
-    0% {
-      transform: scale(1.2);
-      opacity: 0.6;
-    }
-    100% {
-      transform: scale(1.6);
-      opacity: 1;
-    }
-  }
-  
-  @keyframes thinking-glow {
-    0% {
-      transform: scale(1.1) rotate(0deg);
-      opacity: 0.5;
-    }
-    50% {
-      transform: scale(1.4) rotate(180deg);
-      opacity: 0.9;
-    }
-    100% {
-      transform: scale(1.1) rotate(360deg);
-      opacity: 0.5;
-    }
-  }
-  
-  @keyframes float-around {
-    0% {
-      transform: translate(0, 0) scale(1);
-      opacity: 0.8;
-    }
-    25% {
-      transform: translate(30px, -40px) scale(1.3);
-      opacity: 1;
-    }
-    50% {
-      transform: translate(-20px, -60px) scale(0.7);
-      opacity: 0.6;
-    }
-    75% {
-      transform: translate(-40px, 20px) scale(1.1);
-      opacity: 0.9;
-    }
-    100% {
-      transform: translate(0, 0) scale(1);
-      opacity: 0.8;
-    }
   }
   
   @keyframes float-gentle {
@@ -233,41 +112,6 @@
     }
     75% {
       transform: translate(-20px, -20px) scale(1.05);
-    }
-  }
-
-  @keyframes quantum-energy {
-    0%, 100% {
-      transform: scale(1) rotate(0deg);
-      opacity: 0.7;
-    }
-    50% {
-      transform: scale(1.2) rotate(180deg);
-      opacity: 1;
-    }
-  }
-
-  @keyframes holographic-shift {
-    0%, 100% {
-      filter: hue-rotate(0deg) brightness(1);
-    }
-    33% {
-      filter: hue-rotate(120deg) brightness(1.2);
-    }
-    66% {
-      filter: hue-rotate(240deg) brightness(0.8);
-    }
-  }
-
-  @keyframes neural-flow {
-    0% {
-      background-position: 0% 0%;
-    }
-    50% {
-      background-position: 100% 100%;
-    }
-    100% {
-      background-position: 0% 0%;
     }
   }
 }
